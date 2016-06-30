@@ -1,5 +1,17 @@
-function DXL = loadDXL(ids)
+function DXL = loadDXL(ids, motorDirection, motorOffset)
     DXL.ids = ids;
+    
+    if nargin > 2
+        DXL.motorOffset = motorOffset;
+    else
+        DXL.motorOffset = zeros(size(ids,1), 1);
+    end
+
+    if nargin > 1
+        DXL.motorDirection = motorDirection;
+    else
+        DXL.motorDirection = ones(size(ids,1), 1);
+    end
     
     DXL.init = @dxl_initialize;
     DXL.finalize = @dxl_finalize;
